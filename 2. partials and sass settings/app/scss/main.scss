@@ -1,0 +1,13 @@
+@forward "base/index";
+@use "util/index" as variable;
+
+
+header{
+   background-color: variable.$headerBgColor;
+   padding: 1rem;
+}
+
+main{
+   background-color: variable.$mainBgColor;
+   padding: 1rem;
+}
