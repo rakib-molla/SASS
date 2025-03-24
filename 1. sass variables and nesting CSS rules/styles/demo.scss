@@ -9,9 +9,80 @@
 $header-bgColor: #ffab73;
 $main-bgColor: rgb(90, 150, 207);
 $nav-color: black;
-$footer-bgColor: purple;
+$footer-bgColor: rgb(37, 216, 20);
 $paragraph-fontSize: 16px;
 
+
+// mixin 
+@mixin paragraph-style($size, $number, $text, $color){
+   font-size: $size;
+   font-weight: $number;
+   text-align: $text;
+   color: $color;
+}
+
+// include
+#about p{
+   @include paragraph-style(5rem, 700, right, white);
+}
+#education p{
+   @include paragraph-style(10rem, 300, left, red);
+}
+
+
+// extend an inheritance start 
+.btn {
+   padding: 10px 15px;
+   color: #fff;
+   border: none;
+}
+
+#download-btn{
+   @extend .btn;
+   background-color: greenyellow
+}
+#learn-more{
+   @extend .btn;
+   background-color: purple;
+}// extend an inheritance end 
+
+
+// condition statement start
+@mixin setFontSize($value){
+   @if $value == small {
+      font-size: 12px;
+   } @else if $value == medium {
+      font-size: 16px;
+   } @else if $value == large {
+      font-size: 2rem;
+   } @else {
+      font-size: none;
+   }
+} // condition statement end
+
+
+//sass using for loop start  
+[class*="col-"]{
+   float: left;
+}
+@for $i from 1 through 12{
+   .col-#{$i} {width: 100% / 12 * $i}
+}
+//sass using for loop end 
+
+
+// each start 
+// @each $color in red green blue purple{
+//    .#{$color}-text {color: $color};
+// }
+
+$colors: (color1: red, color2:green, color3:blue);
+@each $key, $color in $colors{
+   .#{$color}-text {color: $color}
+}
+
+
+// each end
 
 header{
    background-color: $header-bgColor;
@@ -30,6 +101,7 @@ nav {
             padding: 15px;
             text-decoration: none;
             color: #fff;
+            @include setFontSize(small);
          }
          a:hover{
             background: $footer-bgColor;
